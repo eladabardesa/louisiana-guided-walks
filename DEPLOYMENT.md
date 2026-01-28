@@ -6,7 +6,7 @@
 2. Click the **"+"** icon in the top right → **"New repository"**
 3. Repository name: `louisiana-guided-walks` (or your preferred name)
 4. Description: "Landing page for pilot museum art walks at Louisiana"
-5. Choose **Public** or **Private**
+5. Choose **Private** (Railway works perfectly with private repos via GitHub OAuth)
 6. **DO NOT** initialize with README, .gitignore, or license (we already have these)
 7. Click **"Create repository"**
 
@@ -43,8 +43,10 @@ git push -u origin main
 2. Click **"New Project"**
 
 3. Select **"Deploy from GitHub repo"**
+   - Railway will ask for GitHub permissions (grant access to your private repos)
 
 4. Choose your `louisiana-guided-walks` repository
+   - Private repos work perfectly - Railway accesses them via GitHub OAuth
 
 5. Railway will automatically:
    - Detect it's a Next.js project
