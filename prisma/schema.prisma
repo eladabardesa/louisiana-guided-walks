@@ -13,13 +13,15 @@ datasource db {
 model Submission {
   id           String   @id @default(cuid())
   selectedDate String
+  ticketQuantity Int    @default(1)
   fullName     String
   email        String
-  phone        String?
+  phone        String
   note         String?
   newsletter   Boolean  @default(false)
   createdAt    DateTime @default(now())
 
   @@index([email])
   @@index([createdAt])
+  @@index([selectedDate])
 }
