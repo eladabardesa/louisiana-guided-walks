@@ -266,7 +266,7 @@ export default function Home() {
           </p>
           <p className="text-base leading-relaxed text-gray-600 sm:text-lg md:text-xl">
             I'm inviting a small group of friends and colleagues to join me for two pilot walks in the museum.
-            We'll take time to look, to listen, to be with artworks — and to see what happens when they look back at us.
+            We'll take time to look, to listen, to be with artworks, and to see what happens when they look back at us.
           </p>
         </header>
 
@@ -289,7 +289,7 @@ export default function Home() {
             <p>
               In these walks, I'd like to offer something else.
               To come as you are.
-              To ask questions, to disagree, to talk, to feel — and to feel OK about it.
+              To ask questions, to disagree, to talk, to feel, and to feel OK about it.
             </p>
             <p>
               We'll walk slowly.
@@ -306,11 +306,11 @@ export default function Home() {
           </h2>
           <div className="space-y-3 sm:space-y-4 text-sm leading-relaxed text-gray-700 sm:text-base md:text-lg">
             <p>
-              Art has always been a big part of my life — cinema, music, theatre, literature, visual art.
+              Art has always been a big part of my life, cinema, music, theatre, literature, visual art.
               I honestly can't imagine a day without it.
             </p>
             <p>
-              Over the years I've worked as an art educator in many forms: with kids, tourists, and adults; in museums, workplaces, and living rooms. A special mission for me has been to find a way into art דווקא with people who are not used to it — people who might usually choose something else.
+              Over the years I've worked as an art educator in many forms, with kids, tourists, and adults, in museums, workplaces, and living rooms. A special mission for me has been to find a way into art with people who are not used to it, people who might usually choose something else.
             </p>
             <p>
               Living so close to Louisiana feels like a gift.
