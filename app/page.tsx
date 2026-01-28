@@ -22,9 +22,8 @@ const TOUR_DATES = [
   },
 ] as const;
 
-// Contact information - UPDATE WITH YOUR ACTUAL PHONE NUMBER
-const CONTACT_PHONE = '+4591764091'; // Replace with your actual phone number (e.g., +45 12 34 56 78)
-const MESSENGER_USERNAME = 'eladbardes'; // Replace with your Facebook Messenger username (without @)
+// Contact information
+const CONTACT_PHONE = '+4591764091';
 
 // API endpoint for form submissions
 const API_ENDPOINT = '/api/signup';
