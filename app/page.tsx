@@ -216,17 +216,20 @@ export default function Home() {
             },
           }));
         }
-        // Reset form
-        setFormData({
-          selectedDate: '',
-          ticketQuantity: 1,
-          fullName: '',
-          email: '',
-          phone: '',
-          note: '',
-          newsletter: false,
-        });
-        setSelectedDate('');
+        // Reset form after a delay to show success message
+        setTimeout(() => {
+          setFormData({
+            selectedDate: '',
+            ticketQuantity: 1,
+            fullName: '',
+            email: '',
+            phone: '',
+            note: '',
+            newsletter: false,
+          });
+          setSelectedDate('');
+          setSubmitStatus('idle');
+        }, 10000); // Show success message for 10 seconds
       } else {
         const errorData = await response.json();
         setSubmitStatus('error');
@@ -410,6 +413,30 @@ export default function Home() {
             </p>
           )}
 
+          {/* Success message - shown outside form so it persists */}
+          {submitStatus === 'success' && (
+            <div
+              className="mb-6 rounded-sm bg-gray-50 p-4 sm:p-5 text-sm sm:text-base text-gray-900"
+              role="alert"
+            >
+              <p className="font-medium">Thank you!</p>
+              <p className="mt-1">Your details have been sent. I'll be in touch soon.</p>
+            </div>
+          )}
+
+          {/* Error message - shown outside form */}
+          {submitStatus === 'error' && (
+            <div
+              className="mb-6 rounded-sm bg-red-50 p-4 sm:p-5 text-sm sm:text-base text-red-900"
+              role="alert"
+            >
+              <p className="font-medium">Something went wrong</p>
+              <p className="mt-1">
+                Please try again, or contact me directly if the problem persists.
+              </p>
+            </div>
+          )}
+
           {/* Signup form */}
           {selectedDate && !availability[selectedDate]?.isSoldOut && (
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
@@ -547,30 +574,6 @@ export default function Home() {
                   I'd like to get updates about future walks
                 </label>
               </div>
-
-              {/* Success message */}
-              {submitStatus === 'success' && (
-                <div
-                  className="rounded-sm bg-gray-50 p-3 sm:p-4 text-xs sm:text-sm text-gray-900"
-                  role="alert"
-                >
-                  <p className="font-medium">Thank you!</p>
-                  <p className="mt-1">Your details have been sent. I'll be in touch soon.</p>
-                </div>
-              )}
-
-              {/* Error message */}
-              {submitStatus === 'error' && (
-                <div
-                  className="rounded-sm bg-red-50 p-3 sm:p-4 text-xs sm:text-sm text-red-900"
-                  role="alert"
-                >
-                  <p className="font-medium">Something went wrong</p>
-                  <p className="mt-1">
-                    Please try again, or contact me directly if the problem persists.
-                  </p>
-                </div>
-              )}
 
               <button
                 type="submit"
