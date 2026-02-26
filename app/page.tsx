@@ -50,8 +50,8 @@ export default function Home() {
       {/* Hero — muted, editorial */}
       <section className="relative h-[80vh] sm:h-[88vh] overflow-hidden -mt-16 sm:-mt-20">
         <img
-          src="/venues/simian-langer.png"
-          alt="Laura Langer, Why am I me?"
+          src="/general-hero.jpeg"
+          alt="Art projection in a dark museum space"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
@@ -128,6 +128,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Image strip — real walk moments */}
+      <section className="py-4 sm:py-6">
+        <div className="page-container">
+          <div className="grid grid-cols-3 gap-3 sm:gap-5">
+            <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+              <img
+                src="/general-group.jpeg"
+                alt="A group watching a video installation during an AAE walk"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+              <img
+                src="/general-sculpture.jpeg"
+                alt="Outdoor sculpture in snow"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+              <img
+                src="/general-materials.jpeg"
+                alt="AAE walk materials and booklets"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Venues */}
       <section className="bg-gray-50 page-section">
         <div className="page-container">
@@ -174,8 +206,8 @@ export default function Home() {
             </div>
             <div className="aspect-[4/3] overflow-hidden bg-gray-100">
               <img
-                src="/venues/arken-rasmussen.jpg"
-                alt="Kenneth Rasmussen installation at Arken"
+                src="/elad-guiding.jpeg"
+                alt="Elad guiding a group through art"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
