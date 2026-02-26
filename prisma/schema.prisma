@@ -10,18 +10,91 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum TourType {
+  REGULAR
+  FAMILIES_COUPLES
+  TEAMBUILDING
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  STRIPE
+  MOBILEPAY
+}
+
 model Submission {
-  id           String   @id @default(cuid())
-  selectedDate String
-  ticketQuantity Int    @default(1)
-  fullName     String
-  email        String
-  phone        String
-  note         String?
-  newsletter   Boolean  @default(false)
-  createdAt    DateTime @default(now())
+  id             String   @id @default(cuid())
+  selectedDate   String
+  ticketQuantity Int      @default(1)
+  fullName       String
+  email          String
+  phone          String
+  note           String?
+  newsletter     Boolean  @default(false)
+  venue          String?
+  tourType       String?
+  createdAt      DateTime @default(now())
 
   @@index([email])
   @@index([createdAt])
   @@index([selectedDate])
+  @@index([venue])
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  tourType    TourType
+  price       Int      // Price in øre (Danish cents) or smallest currency unit
+  capacity    Int?     // Max participants (null for unlimited)
+  isActive    Boolean  @default(true)
+  isB2B       Boolean  @default(false) // For teambuilding - no public pricing
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orders      Order[]
+
+  @@index([tourType])
+  @@index([isActive])
+}
+
+model Order {
+  id            String        @id @default(cuid())
+  orderNumber   String        @unique // Human-readable order number
+  productId     String
+  product       Product       @relation(fields: [productId], references: [id])
+  quantity      Int           @default(1)
+  totalAmount   Int           // Total in øre
+  status        OrderStatus   @default(PENDING)
+  paymentMethod PaymentMethod?
+  
+  // Customer info
+  fullName      String
+  email         String
+  phone         String
+  note          String?
+  newsletter    Boolean       @default(false)
+  
+  // Payment info
+  paymentIntentId String?     // Stripe payment intent ID
+  mobilepayId     String?     // MobilePay transaction ID
+  
+  // Tour-specific info
+  selectedDate   String?       // For regular tours with dates
+  customDate     DateTime?    // For families/couples - preferred date
+  
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([orderNumber])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
 }

@@ -5,7 +5,13 @@ A minimal, mobile-first landing page for pilot museum art walks at Louisiana Mus
 ## Features
 
 - Single-page design with clean, museum-like aesthetic
-- Two tour date cards with easy selection
+- **E-commerce shop** with three tour types:
+  - Regular group walks
+  - Exclusive families & couples walks
+  - Teambuilding B2B packages
+- **Payment integration:** Stripe (MobilePay ready)
+- **Order management** system
+- Two pilot walk date cards with easy selection
 - Signup form with validation
 - PostgreSQL database backend (via Prisma)
 - Fully accessible (keyboard navigation, screen reader support)
@@ -28,14 +34,28 @@ A minimal, mobile-first landing page for pilot museum art walks at Louisiana Mus
      ```
      DATABASE_URL="postgresql://user:password@localhost:5432/louisiana_walks?schema=public"
      ```
+   - Add Stripe keys (see [SETUP_SHOP.md](SETUP_SHOP.md) for details):
+     ```
+     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+     STRIPE_SECRET_KEY=sk_test_...
+     STRIPE_WEBHOOK_SECRET=whsec_...
+     NEXT_PUBLIC_BASE_URL=http://localhost:3000
+     ```
 
 4. **Set up the database:**
    ```bash
    npx prisma migrate dev --name init
+   npx prisma migrate dev --name add_shop_tables
    ```
    This will create the database tables.
 
-5. **Run development server:**
+5. **Seed initial products (optional):**
+   ```bash
+   npm run seed
+   ```
+   Creates sample products for the shop.
+
+6. **Run development server:**
    ```bash
    npm run dev
    ```
@@ -92,14 +112,33 @@ Railway will automatically:
 
 ```
 ├── app/
+│   ├── admin/
+│   │   ├── page.tsx         # Submissions management
+│   │   └── orders/
+│   │       └── page.tsx     # Orders management
 │   ├── api/
-│   │   └── signup/
-│   │       └── route.ts    # API endpoint for form submissions
-│   ├── layout.tsx           # Root layout with metadata
-│   ├── page.tsx             # Main landing page component
-│   └── globals.css          # Global styles and Tailwind imports
+│   │   ├── admin/
+│   │   │   ├── submissions/ # Admin API for submissions
+│   │   │   └── orders/      # Admin API for orders
+│   │   ├── payments/
+│   │   │   ├── create-intent/ # Stripe checkout session
+│   │   │   ├── webhook/      # Stripe webhook handler
+│   │   │   └── verify/       # Payment verification
+│   │   ├── orders/
+│   │   │   └── create/       # Order creation
+│   │   └── products/         # Product listing API
+│   ├── shop/
+│   │   ├── page.tsx          # Shop listing page
+│   │   ├── [id]/
+│   │   │   └── page.tsx      # Product checkout page
+│   │   └── thank-you/
+│   │       └── page.tsx      # Thank you page
+│   ├── layout.tsx            # Root layout with metadata
+│   ├── page.tsx              # Main landing page component
+│   └── globals.css           # Global styles and Tailwind imports
 ├── prisma/
-│   └── schema.prisma        # Database schema
+│   ├── schema.prisma         # Database schema
+│   └── seed.ts               # Database seed script
 ├── package.json
 ├── tsconfig.json
 ├── tailwind.config.ts
@@ -108,15 +147,41 @@ Railway will automatically:
 
 ## Database Schema
 
-The `Submission` model stores:
+### Submission Model (Legacy)
+Stores pilot walk registrations:
 - `id` - Unique identifier
 - `selectedDate` - Selected tour date string
+- `ticketQuantity` - Number of tickets
 - `fullName` - User's full name
 - `email` - User's email address
-- `phone` - Phone number (optional)
+- `phone` - Phone number
 - `note` - Additional note (optional)
 - `newsletter` - Newsletter opt-in (boolean)
 - `createdAt` - Submission timestamp
+
+### Product Model (New)
+Stores tour products:
+- `id` - Unique identifier
+- `name` - Product name
+- `description` - Product description
+- `tourType` - REGULAR, FAMILIES_COUPLES, or TEAMBUILDING
+- `price` - Price in øre (Danish cents)
+- `capacity` - Max participants (null for unlimited)
+- `isActive` - Whether product is available
+- `isB2B` - Whether it's a B2B product (no public pricing)
+
+### Order Model (New)
+Stores shop orders:
+- `id` - Unique identifier
+- `orderNumber` - Human-readable order number
+- `productId` - Reference to product
+- `quantity` - Number of tickets/products
+- `totalAmount` - Total price in øre
+- `status` - PENDING, PAID, CANCELLED, REFUNDED
+- `paymentMethod` - STRIPE or MOBILEPAY
+- Customer info (name, email, phone, note, newsletter)
+- Payment IDs (Stripe payment intent, MobilePay transaction)
+- Tour-specific dates
 
 ## Configuration
 
@@ -139,7 +204,16 @@ The form sends data to `/api/signup` which saves to PostgreSQL:
 - **Tailwind CSS**
 - **Prisma** (ORM)
 - **PostgreSQL** (database)
+- **Stripe** (payments)
 - **Railway** (hosting)
+
+## Shop Features
+
+See [SETUP_SHOP.md](SETUP_SHOP.md) for detailed shop setup instructions including:
+- Stripe configuration
+- Product management
+- Order processing
+- Payment webhooks
 
 ## Database Management
 

@@ -4,26 +4,15 @@ import { prisma } from '@/lib/prisma';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { selectedDate, ticketQuantity, fullName, email, phone, note, newsletter } = body;
+    const { selectedDate, ticketQuantity, fullName, email, phone, note, newsletter, venue, tourType } = body;
 
-    // Basic validation
-    if (!selectedDate || !fullName || !email || !phone) {
+    if (!fullName || !email || !phone) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    // Validate ticket quantity
-    const quantity = parseInt(ticketQuantity) || 1;
-    if (quantity < 1 || quantity > 2) {
-      return NextResponse.json(
-        { error: 'Ticket quantity must be between 1 and 2' },
-        { status: 400 }
-      );
-    }
-
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -32,43 +21,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check availability before saving
-    const tourId = selectedDate.includes('Pilot walk #1') ? 'walk-1' : selectedDate.includes('Pilot walk #2') ? 'walk-2' : '';
-    if (tourId) {
-      // Count current tickets sold for this tour
-      const ticketsSold = await prisma.submission.aggregate({
-        where: {
-          selectedDate: {
-            startsWith: tourId === 'walk-1' ? 'Pilot walk #1' : 'Pilot walk #2',
-          },
-        },
-        _sum: {
-          ticketQuantity: true,
-        },
-      });
+    const quantity = parseInt(ticketQuantity) || 1;
 
-      const totalSold = ticketsSold._sum.ticketQuantity || 0;
-      const maxTickets = 10;
-      const available = Math.max(0, maxTickets - totalSold);
-
-      if (available < quantity) {
-        return NextResponse.json(
-          { error: `Only ${available} ticket(s) available` },
-          { status: 400 }
-        );
-      }
-    }
-
-    // Save to database
     const submission = await prisma.submission.create({
       data: {
-        selectedDate,
+        selectedDate: selectedDate || 'N/A',
         ticketQuantity: quantity,
         fullName,
         email,
         phone,
         note: note || null,
         newsletter: Boolean(newsletter),
+        venue: venue || null,
+        tourType: tourType || null,
       },
     });
 
@@ -78,24 +43,16 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('Submission error:', error);
-    // Log more details for debugging
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    const errorStack = error instanceof Error ? error.stack : undefined;
-    
-    console.error('Error message:', errorMessage);
-    if (errorStack) {
-      console.error('Error stack:', errorStack);
-    }
-    
-    // Check for common database connection errors
-    if (errorMessage.includes('Can\'t reach database') || errorMessage.includes('P1001')) {
+
+    if (errorMessage.includes("Can't reach database") || errorMessage.includes('P1001')) {
       console.error('Database connection failed. Check DATABASE_URL in .env');
     }
-    
+
     return NextResponse.json(
-      { 
-        error: 'Failed to save submission', 
-        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined 
+      {
+        error: 'Failed to save submission',
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
       },
       { status: 500 }
     );
