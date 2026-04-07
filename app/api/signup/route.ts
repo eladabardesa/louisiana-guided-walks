@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { selectedDate, ticketQuantity, fullName, email, phone, note, newsletter, venue, tourType } = body;
 
-    if (!fullName || !email || !phone) {
+    if (!fullName || !email) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
         ticketQuantity: quantity,
         fullName,
         email,
-        phone,
+        phone: phone || '',
         note: note || null,
         newsletter: Boolean(newsletter),
         venue: venue || null,

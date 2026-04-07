@@ -17,8 +17,6 @@ type FormData = {
 type FormErrors = {
   fullName?: string;
   email?: string;
-  phone?: string;
-  venue?: string;
   tourType?: string;
 };
 
@@ -73,9 +71,7 @@ function ContactForm() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
-    if (!formData.venue) newErrors.venue = 'Please select a venue';
-    if (!formData.tourType) newErrors.tourType = 'Please select a tour type';
+    if (!formData.tourType) newErrors.tourType = 'Please select an experience type';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -208,7 +204,7 @@ function ContactForm() {
 
         <div>
           <label htmlFor="phone" className="block text-xs tracking-widest uppercase text-gray-400 mb-2">
-            Phone
+            Phone <span className="normal-case text-gray-300">(optional)</span>
           </label>
           <input
             type="tel"
@@ -216,30 +212,21 @@ function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
-            required
-            aria-required="true"
-            aria-invalid={!!errors.phone}
-            className={fieldClass('phone')}
+            className="w-full border-b border-gray-200 bg-transparent px-0 py-3 text-base text-gray-900 placeholder-gray-300 transition-colors focus:border-gray-900 focus:outline-none"
             placeholder="+45 12 34 56 78"
           />
-          {errors.phone && (
-            <p className="mt-1 text-xs text-red-500">{errors.phone}</p>
-          )}
         </div>
 
         <div>
           <label htmlFor="venue" className="block text-xs tracking-widest uppercase text-gray-400 mb-2">
-            Venue
+            Venue <span className="normal-case text-gray-300">(optional)</span>
           </label>
           <select
             id="venue"
             name="venue"
             value={formData.venue}
             onChange={handleInputChange}
-            required
-            aria-required="true"
-            aria-invalid={!!errors.venue}
-            className={fieldClass('venue')}
+            className="w-full border-b border-gray-200 bg-transparent px-0 py-3 text-base text-gray-900 placeholder-gray-300 transition-colors focus:border-gray-900 focus:outline-none"
           >
             <option value="">Select a venue</option>
             {venues.map((v) => (
@@ -248,9 +235,6 @@ function ContactForm() {
               </option>
             ))}
           </select>
-          {errors.venue && (
-            <p className="mt-1 text-xs text-red-500">{errors.venue}</p>
-          )}
         </div>
 
         <div>
