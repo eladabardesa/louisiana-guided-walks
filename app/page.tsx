@@ -205,9 +205,9 @@ export default function Home() {
                 ))}
               </div>
               <blockquote className="text-sm text-gray-700 leading-relaxed flex-1">
-                &ldquo;A truly unique experience. Elad has a gift for making you see art in a completely new way. I left feeling like I&rsquo;d actually been somewhere, not just looked at things.&rdquo;
+                &ldquo;The guided art walk felt less like a conventional museum tour and more like a shared act of looking. Rather than searching for the &lsquo;correct&rsquo; interpretation, the exercises prompted us to notice details, observe our reactions, and reflect on how a work affects us personally.&rdquo;
               </blockquote>
-              <p className="mt-4 text-xs text-gray-400">Google Review</p>
+              <p className="mt-4 text-xs text-gray-400">Marina Scandi &middot; Google Review</p>
             </div>
 
             <div className="flex flex-col">
@@ -219,9 +219,9 @@ export default function Home() {
                 ))}
               </div>
               <blockquote className="text-sm text-gray-700 leading-relaxed flex-1">
-                &ldquo;The best thing I&rsquo;ve done in Copenhagen in months. It&rsquo;s not a lecture, it&rsquo;s a conversation. Elad creates a space where you feel comfortable sharing what you actually think and feel.&rdquo;
+                &ldquo;I would dare to say that this museum walk changed the way I approach art. Elad guided us in such a subtle way that it never felt like we were being led, yet somehow he still opened the space for us to experience everything we were meant to notice.&rdquo;
               </blockquote>
-              <p className="mt-4 text-xs text-gray-400">Google Review</p>
+              <p className="mt-4 text-xs text-gray-400">Chebumashka &middot; Google Review</p>
             </div>
 
             <div className="flex flex-col">
@@ -233,15 +233,15 @@ export default function Home() {
                 ))}
               </div>
               <blockquote className="text-sm text-gray-700 leading-relaxed flex-1">
-                &ldquo;We did the teambuilding format with our team. The combination of art and honest conversation was powerful. People opened up in ways they never do at the office.&rdquo;
+                &ldquo;Elad is a thoughtful guide who brings great sensitivity, knowledge, and openness. His engaging insights and guidance help create a meaningful and personal dialogue with the art exhibits.&rdquo;
               </blockquote>
-              <p className="mt-4 text-xs text-gray-400">Google Review</p>
+              <p className="mt-4 text-xs text-gray-400">Gili Y &middot; Google Review</p>
             </div>
           </div>
 
           <div className="mt-10 text-center">
             <a
-              href="https://www.google.com/search?q=aae+attentive+art+encounters+reviews"
+              href="https://search.google.com/local/reviews?placeid=ChIJN1t_tDeuEmsRUsoyg83frY4"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-gray-900 transition-colors"
