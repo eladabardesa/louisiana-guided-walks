@@ -37,20 +37,6 @@ export const venues: Venue[] = [
       'Arken\'s striking building is an artwork in itself. Inside, the exhibitions push boundaries and invite strong reactions. Our walks here embrace that intensity — we slow down in a space that dares to be loud, and find the quiet moments within it.',
   },
   {
-    slug: 'simian',
-    name: 'Simian',
-    shortName: 'Simian',
-    heroImage: '/venues/simian-xenakis.png',
-    images: [
-      { src: '/venues/simian-xenakis.png', alt: "Iannis Xenakis, La Légende d'Eer at Simian" },
-      { src: '/venues/simian-extended-views.png', alt: 'Extended Views II at Simian' },
-      { src: '/venues/simian-langer.png', alt: 'Laura Langer, Why am I me? at Simian' },
-    ],
-    tagline: 'Art at the edge',
-    description:
-      'Simian is a space where experimental art meets raw curiosity. The work shown here often resists easy interpretation — and that\'s exactly what makes our walks so rewarding. We sit with the unfamiliar and let it speak to us in its own time.',
-  },
-  {
     slug: 'charlottenborg',
     name: 'Kunsthal Charlottenborg',
     shortName: 'Charlottenborg',
