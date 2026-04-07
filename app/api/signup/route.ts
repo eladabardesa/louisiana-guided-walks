@@ -70,9 +70,12 @@ export async function POST(request: NextRequest) {
             </div>
           `,
         });
+        console.log('Notification email sent successfully');
       } catch (emailError) {
         console.error('Failed to send notification email:', emailError);
       }
+    } else {
+      console.warn('Resend not configured — RESEND_API_KEY missing');
     }
 
     return NextResponse.json(
