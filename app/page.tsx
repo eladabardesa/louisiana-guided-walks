@@ -62,7 +62,7 @@ export default function Home() {
               Encounters
             </h1>
             <p className="text-white/70 text-base sm:text-lg md:text-xl font-light max-w-lg leading-relaxed opacity-0 animate-fade-in-delay">
-              Not your usual art tour. Slower. More curious. More yours.
+              Slower. More curious. More yours. Not your usual art tour.
             </p>
             <div className="mt-8 sm:mt-10 flex flex-wrap gap-4 opacity-0 animate-fade-in-delay">
               <Link
@@ -205,7 +205,7 @@ export default function Home() {
                 ))}
               </div>
               <blockquote className="text-sm text-gray-700 leading-relaxed flex-1">
-                &ldquo;The guided art walk felt less like a conventional museum tour and more like a shared act of looking. Rather than searching for the &lsquo;correct&rsquo; interpretation, the exercises prompted us to notice details, observe our reactions, and reflect on how a work affects us personally.&rdquo;
+                &ldquo;The guided art walk through New Works at the Louisiana Museum of Modern Art on 10 February 2026 with Elad Bardes felt less like a conventional museum tour and more like a shared act of looking. Rather than searching for the &lsquo;correct&rsquo; interpretation, the exercises prompted us to notice details, observe our reactions, and reflect on how a work affects us personally.&rdquo;
               </blockquote>
               <p className="mt-4 text-xs text-gray-400">Marina Scandi &middot; Google Review</p>
             </div>
@@ -219,7 +219,7 @@ export default function Home() {
                 ))}
               </div>
               <blockquote className="text-sm text-gray-700 leading-relaxed flex-1">
-                &ldquo;I would dare to say that this museum walk changed the way I approach art. Elad guided us in such a subtle way that it never felt like we were being led, yet somehow he still opened the space for us to experience everything we were meant to notice.&rdquo;
+                &ldquo;I would dare to say that this museum walk changed the way I approach art. Before this tour, I perceived a museum as a place where you have to study, focusing mainly on reading every single explanation for each artwork rather than engaging with the art itself. This experience, however, was the complete opposite - for the first time, visiting a museum actually felt like entertainment.&rdquo;
               </blockquote>
               <p className="mt-4 text-xs text-gray-400">Chebumashka &middot; Google Review</p>
             </div>
@@ -233,7 +233,7 @@ export default function Home() {
                 ))}
               </div>
               <blockquote className="text-sm text-gray-700 leading-relaxed flex-1">
-                &ldquo;Elad is a thoughtful guide who brings great sensitivity, knowledge, and openness. His engaging insights and guidance help create a meaningful and personal dialogue with the art exhibits.&rdquo;
+                &ldquo;I joined Elad on a tour in Louisiana, and he is a thoughtful guide who brings great sensitivity, knowledge, and openness. His engaging insights and guidance help create a meaningful and personal dialogue with the art exhibits.&rdquo;
               </blockquote>
               <p className="mt-4 text-xs text-gray-400">Gili Y &middot; Google Review</p>
             </div>
@@ -241,7 +241,7 @@ export default function Home() {
 
           <div className="mt-10 text-center">
             <a
-              href="https://search.google.com/local/reviews?placeid=ChIJN1t_tDeuEmsRUsoyg83frY4"
+              href="https://www.google.com/search?q=AAE+%E2%80%93+Attentive+Art+Encounters"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-gray-900 transition-colors"
