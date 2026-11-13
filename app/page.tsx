@@ -62,7 +62,7 @@ export default function Home() {
               Encounters
             </h1>
             <p className="text-white/70 text-base sm:text-lg md:text-xl font-light max-w-lg leading-relaxed opacity-0 animate-fade-in-delay">
-              Slower. More curious. More yours. Not your usual art tour.
+              Slower. More yours. Not your usual art tour.
             </p>
             <div className="mt-8 sm:mt-10 flex flex-wrap gap-4 opacity-0 animate-fade-in-delay">
               <Link
