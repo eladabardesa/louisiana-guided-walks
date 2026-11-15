@@ -1,9 +1,6 @@
 'use client';
 
-import { useState, FormEvent, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-type VenueOption = { slug: string; name: string; shortName: string };
-
+import { useState, FormEvent, Suspense } from 'react';
 type FormData = {
   fullName: string;
   email: string;
@@ -21,37 +18,18 @@ type FormErrors = {
 };
 
 function ContactForm() {
-  const searchParams = useSearchParams();
-  const preselectedVenue = searchParams.get('venue') || '';
-  const preselectedTourType = searchParams.get('tourType') || '';
-
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
     phone: '',
-    venue: preselectedVenue,
-    tourType: preselectedTourType,
+    venue: 'louisiana',
+    tourType: 'regular',
     note: '',
     newsletter: false,
   });
-  const [venues, setVenues] = useState<VenueOption[]>([]);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  useEffect(() => {
-    fetch('/api/venues')
-      .then((r) => (r.ok ? r.json() : []))
-      .then((data) => setVenues(data));
-  }, []);
-
-  useEffect(() => {
-    setFormData((prev) => ({
-      ...prev,
-      ...(preselectedVenue && { venue: preselectedVenue }),
-      ...(preselectedTourType && { tourType: preselectedTourType }),
-    }));
-  }, [preselectedVenue, preselectedTourType]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -78,7 +56,6 @@ function ContactForm() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    if (!formData.tourType) newErrors.tourType = 'Please select an experience type';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -92,15 +69,13 @@ function ContactForm() {
     setSubmitStatus('idle');
 
     try {
-      const venueName = venues.find((v) => v.slug === formData.venue)?.name || formData.venue;
-
       const payload = {
-        selectedDate: `${venueName} — ${formData.tourType}`,
+        selectedDate: 'Louisiana',
         fullName: formData.fullName,
         email: formData.email,
         phone: formData.phone,
-        venue: formData.venue,
-        tourType: formData.tourType,
+        venue: 'louisiana',
+        tourType: 'regular',
         note: formData.note || '',
         newsletter: formData.newsletter,
         ticketQuantity: 1,
@@ -225,50 +200,6 @@ function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="venue" className="block text-xs tracking-widest uppercase text-gray-400 mb-2">
-            Venue <span className="normal-case text-gray-300">(optional)</span>
-          </label>
-          <select
-            id="venue"
-            name="venue"
-            value={formData.venue}
-            onChange={handleInputChange}
-            className="w-full border-b border-gray-200 bg-transparent px-0 py-3 text-base text-gray-900 placeholder-gray-300 transition-colors focus:border-gray-900 focus:outline-none"
-          >
-            <option value="">Select a venue</option>
-            {venues.map((v) => (
-              <option key={v.slug} value={v.slug}>
-                {v.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="tourType" className="block text-xs tracking-widest uppercase text-gray-400 mb-2">
-            Experience type
-          </label>
-          <select
-            id="tourType"
-            name="tourType"
-            value={formData.tourType}
-            onChange={handleInputChange}
-            required
-            aria-required="true"
-            aria-invalid={!!errors.tourType}
-            className={fieldClass('tourType')}
-          >
-            <option value="">Select a type</option>
-            <option value="regular">Regular walk</option>
-            <option value="families-couples">Families &amp; couples</option>
-            <option value="teambuilding">Teambuilding</option>
-          </select>
-          {errors.tourType && (
-            <p className="mt-1 text-xs text-red-500">{errors.tourType}</p>
-          )}
-        </div>
-
-        <div>
           <label htmlFor="note" className="block text-xs tracking-widest uppercase text-gray-400 mb-2">
             Message <span className="normal-case text-gray-300">(optional)</span>
           </label>
@@ -350,7 +281,7 @@ export default function ContactPage() {
               Get in touch
             </h1>
             <p className="text-base sm:text-lg text-gray-500 font-light mb-10 sm:mb-14">
-              Write to me. I&rsquo;ll get back to you.
+              Write if you want to come to a walk at Louisiana. I&rsquo;ll get back to you.
             </p>
 
             <Suspense fallback={<div className="text-gray-400">Loading form...</div>}>

@@ -24,7 +24,6 @@ export default function AboutPage() {
                 </p>
                 <p>
                   Living so close to Louisiana feels like a gift. These walks are my way of sharing it.
-                  We also walk at Arken and Charlottenborg.
                 </p>
               </div>
             </div>
@@ -41,44 +40,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* The walk philosophy */}
-      <section className="page-section border-t border-black/10">
-        <div className="page-container">
-          <div className="max-w-2xl">
-            <h2 className="text-lg sm:text-xl font-normal text-gray-900 mb-4">About the walk</h2>
-            <div className="space-y-5 text-base sm:text-lg text-gray-700 font-light leading-relaxed">
-              <p>
-                A museum, for me, is a place of freedom.
-                Of expression, emotions, and intellect.
-                A place that raises questions, challenges what we think we already know, puts up a mirror, shows beauty and ugliness side by side, and lets us see the world through the eyes of artists and curators.
-              </p>
-              <p>
-                And still, many of us were taught that a museum is a place where you should be quiet.
-                Where you don&rsquo;t really speak.
-                Where the masters know better than you.
-              </p>
-              <p>
-                In these walks, I&rsquo;d like to offer something else.
-                To come as you are.
-                To ask questions, to disagree, to talk, to feel, and to feel OK about it.
-              </p>
-              <p>
-                We&rsquo;ll walk slowly.
-                We&rsquo;ll stop often.
-                We&rsquo;ll leave space for conversation, silence, and whatever comes up.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="page-section pt-0">
         <div className="page-container">
           <Link
-            href="/tours"
-            className="inline-block rounded-lg px-6 py-3 text-sm text-white bg-gray-900 hover:bg-gray-800"
+            href="/contact"
+            className="inline-block rounded-lg px-6 py-3 text-sm text-white bg-[#102033] hover:bg-[#1a3348]"
           >
-            Book a walk
+            Write to me
           </Link>
         </div>
       </section>

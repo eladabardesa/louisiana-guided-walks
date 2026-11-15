@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     template: "%s — AAE",
   },
   description:
-    "Guided walks through museums in Copenhagen. Slow looking, conversation, and shared encounters with art.",
+    "An invitation to one or two attentive walks with Elad at Louisiana Museum.",
   openGraph: {
     title: "AAE — Attentive Art Encounters",
     description:
-      "Guided walks through museums in Copenhagen. Slow looking, conversation, and shared encounters with art.",
+      "An invitation to one or two attentive walks with Elad at Louisiana Museum.",
     type: "website",
   },
 };
@@ -21,8 +21,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

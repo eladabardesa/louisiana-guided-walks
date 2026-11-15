@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default async function ToursPage() {
-  const tours = await getActiveTours();
+  const tours = (await getActiveTours()).filter(
+    (tour) => tour.dates.length > 0 && (!tour.venue || tour.venue.slug === 'louisiana')
+  );
 
   return (
     <main>
@@ -22,19 +24,18 @@ export default async function ToursPage() {
               Walks
             </h1>
             <p className="text-base sm:text-lg text-gray-600 font-light leading-relaxed">
-              Pick a date if there is one. You can pay on the page. For a private walk or a team
-              day, write to me.
+              One or two walks at Louisiana. When a date is set, it will be here.
             </p>
           </div>
 
           {tours.length === 0 ? (
             <div className="rounded-xl border border-gray-200 p-8 max-w-xl">
               <p className="text-gray-600 mb-4">
-                No public tours are listed right now. Leave an inquiry and we&apos;ll help you find
-                a time.
+                No dates yet. I&apos;m planning one or two walks at Louisiana. Write to me if you
+                want to come.
               </p>
               <Link href="/contact" className="text-sm underline">
-                Contact us
+                Write to me
               </Link>
             </div>
           ) : (
