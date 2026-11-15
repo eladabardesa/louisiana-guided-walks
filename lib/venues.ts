@@ -1,3 +1,7 @@
+/**
+ * Static venue helpers kept for client components that need sync access.
+ * Server pages should prefer lib/content.ts (database-backed).
+ */
 export type Venue = {
   slug: string;
   name: string;
@@ -18,9 +22,9 @@ export const venues: Venue[] = [
       { src: '/venues/louisiana-basquiat.jpg', alt: 'Jean-Michel Basquiat at Louisiana Museum' },
       { src: '/venues/louisiana-arbus.jpg', alt: 'Diane Arbus at Louisiana Museum' },
     ],
-    tagline: 'Where the sea meets art',
+    tagline: '',
     description:
-      'Louisiana is where I first understood that a museum could feel like home. We walk through galleries that open onto the sea, letting the art and the landscape talk to each other. Here, the conversation between inside and outside becomes part of the experience itself.',
+      'This is where the walks started. The walk is free. You need a museum ticket, unless you are a member.',
   },
   {
     slug: 'arken',
@@ -32,9 +36,8 @@ export const venues: Venue[] = [
       { src: '/venues/arken-rasmussen.jpg', alt: 'Kenneth Rasmussen installation at Arken' },
       { src: '/venues/arken-andersen.jpg', alt: "Villiam Miklos Andersen, Flora's Wagons of Fools at Arken" },
     ],
-    tagline: 'Bold architecture, bold art',
-    description:
-      'Arken\'s striking building is an artwork in itself. Inside, the exhibitions push boundaries and invite strong reactions. Our walks here embrace that intensity — we slow down in a space that dares to be loud, and find the quiet moments within it.',
+    tagline: '',
+    description: 'We walk here too. You need a museum ticket, unless you are a member.',
   },
   {
     slug: 'charlottenborg',
@@ -44,9 +47,8 @@ export const venues: Venue[] = [
     images: [
       { src: '/venues/charlottenborg-mirga-tas.png', alt: 'Małgorzata Mirga-Tas at Kunsthal Charlottenborg' },
     ],
-    tagline: 'Contemporary art in the heart of Copenhagen',
-    description:
-      'Charlottenborg sits between Nyhavn and Kongens Nytorv, and its exhibitions are always current, always provocative. Walking here, we engage with art that speaks directly to the world we live in now — the questions it raises are the ones we carry with us when we leave.',
+    tagline: '',
+    description: 'We walk here too. You need a museum ticket, unless you are a member.',
   },
 ];
 
@@ -68,7 +70,8 @@ export const tourTypes = [
   {
     id: 'teambuilding',
     name: 'Teambuilding',
-    description: 'Three sessions — one at your workplace, one in the museum, one back at work. Art as a tool for team connection.',
+    description:
+      'Three sessions — one at your workplace, one in the museum, one back at work. Art as a tool for team connection.',
     price: 'Contact for details',
     note: 'B2B packages available',
   },

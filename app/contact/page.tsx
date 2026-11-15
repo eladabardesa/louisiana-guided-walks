@@ -2,7 +2,7 @@
 
 import { useState, FormEvent, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { venues } from '@/lib/venues';
+type VenueOption = { slug: string; name: string; shortName: string };
 
 type FormData = {
   fullName: string;
@@ -34,9 +34,16 @@ function ContactForm() {
     note: '',
     newsletter: false,
   });
+  const [venues, setVenues] = useState<VenueOption[]>([]);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    fetch('/api/venues')
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data) => setVenues(data));
+  }, []);
 
   useEffect(() => {
     setFormData((prev) => ({
@@ -139,7 +146,7 @@ function ContactForm() {
   return (
     <>
       {submitStatus === 'success' && (
-        <div className="mb-8 bg-gray-50 p-6 border border-gray-200" role="alert">
+        <div className="mb-8 rounded-xl bg-gray-50 p-6 border border-gray-200" role="alert">
           <p className="text-base font-normal text-gray-900">Thank you!</p>
           <p className="text-sm text-gray-600 mt-1">
             Your message has been sent. I&rsquo;ll be in touch soon.
@@ -148,7 +155,7 @@ function ContactForm() {
       )}
 
       {submitStatus === 'error' && (
-        <div className="mb-8 bg-red-50 p-6 border border-red-200" role="alert">
+        <div className="mb-8 rounded-xl bg-red-50 p-6 border border-red-200" role="alert">
           <p className="text-base font-normal text-red-900">Something went wrong</p>
           <p className="text-sm text-red-700 mt-1">
             Please try again, or reach me directly at{' '}
@@ -293,7 +300,7 @@ function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`mt-4 w-full py-4 text-sm sm:text-base tracking-wide font-medium text-white bg-gray-900 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+          className={`mt-4 w-full rounded-lg py-4 text-sm sm:text-base tracking-wide font-medium text-white bg-gray-900 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
             isSubmitting ? '' : 'hover:bg-gray-800'
           }`}
         >
@@ -311,19 +318,19 @@ function ContactForm() {
             href="https://wa.me/4591764091"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 border border-gray-200 hover:border-gray-900 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm text-gray-700 border border-gray-200 hover:border-gray-900 hover:text-gray-900 transition-colors"
           >
             WhatsApp
           </a>
           <a
             href="mailto:eladbardes@gmail.com"
-            className="inline-flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 border border-gray-200 hover:border-gray-900 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm text-gray-700 border border-gray-200 hover:border-gray-900 hover:text-gray-900 transition-colors"
           >
             Email
           </a>
           <a
             href="tel:+4591764091"
-            className="inline-flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 border border-gray-200 hover:border-gray-900 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm text-gray-700 border border-gray-200 hover:border-gray-900 hover:text-gray-900 transition-colors"
           >
             +45 91 76 40 91
           </a>
@@ -343,7 +350,7 @@ export default function ContactPage() {
               Get in touch
             </h1>
             <p className="text-base sm:text-lg text-gray-500 font-light mb-10 sm:mb-14">
-              Interested in a walk? Fill in your details and I&rsquo;ll get back to you.
+              Write to me. I&rsquo;ll get back to you.
             </p>
 
             <Suspense fallback={<div className="text-gray-400">Loading form...</div>}>

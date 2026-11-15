@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/tours', label: 'Tours' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -20,11 +21,11 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#f3f0ea]/95 backdrop-blur-sm border-b border-black/10">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 lg:px-16">
         <div className="flex items-center justify-between h-16 sm:h-20">
           <Link href="/" className="group" onClick={() => setIsOpen(false)}>
-            <span className="text-lg sm:text-xl font-light tracking-[0.2em] text-gray-900 uppercase">
+            <span className="text-lg sm:text-xl font-light tracking-[0.2em] text-[#102033] uppercase">
               AAE
             </span>
           </Link>

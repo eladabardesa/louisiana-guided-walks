@@ -6,21 +6,13 @@ type VenueCardProps = {
   priority?: boolean;
 };
 
-export default function VenueCard({ venue, priority = false }: VenueCardProps) {
+export default function VenueCard({ venue }: VenueCardProps) {
   return (
-    <Link href={`/venues/${venue.slug}`} className="venue-card block group">
-      <div className="relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-gray-100">
-        <img
-          src={venue.heroImage}
-          alt={`Artwork at ${venue.name}`}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading={priority ? 'eager' : 'lazy'}
-        />
-        <div className="venue-card-content">
-          <h3 className="venue-name">{venue.shortName}</h3>
-          <p className="venue-tagline">{venue.tagline}</p>
-        </div>
-      </div>
+    <Link
+      href={`/venues/${venue.slug}`}
+      className="block rounded-xl border border-black/10 bg-white p-6 hover:border-black/30 transition-colors"
+    >
+      <h3 className="text-xl font-normal text-gray-900">{venue.shortName}</h3>
     </Link>
   );
 }

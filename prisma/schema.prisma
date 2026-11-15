@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -47,54 +44,104 @@ model Submission {
   @@index([venue])
 }
 
-model Product {
+model Venue {
   id          String   @id @default(cuid())
+  slug        String   @unique
   name        String
-  description String?
-  tourType    TourType
-  price       Int      // Price in øre (Danish cents) or smallest currency unit
-  capacity    Int?     // Max participants (null for unlimited)
+  shortName   String
+  tagline     String
+  description String
+  heroImage   String
+  images      Json     @default("[]")
+  sortOrder   Int      @default(0)
   isActive    Boolean  @default(true)
-  isB2B       Boolean  @default(false) // For teambuilding - no public pricing
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  orders      Order[]
+  tours Tour[]
+
+  @@index([isActive])
+  @@index([sortOrder])
+}
+
+model Tour {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  tourType    TourType
+  price       Int      @default(0)
+  capacity    Int?
+  isActive    Boolean  @default(true)
+  isB2B       Boolean  @default(false)
+  heroImage   String?
+  images      Json     @default("[]")
+  venueId     String?
+  venue       Venue?   @relation(fields: [venueId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  dates  TourDate[]
+  orders Order[]
 
   @@index([tourType])
   @@index([isActive])
+  @@index([venueId])
+}
+
+model TourDate {
+  id        String   @id @default(cuid())
+  tourId    String
+  tour      Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  startsAt  DateTime
+  label     String?
+  language  String?
+  capacity  Int?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders Order[]
+
+  @@index([tourId])
+  @@index([startsAt])
+  @@index([isActive])
+}
+
+model SiteContent {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  label     String?
+  updatedAt DateTime @updatedAt
 }
 
 model Order {
-  id            String        @id @default(cuid())
-  orderNumber   String        @unique // Human-readable order number
-  productId     String
-  product       Product       @relation(fields: [productId], references: [id])
-  quantity      Int           @default(1)
-  totalAmount   Int           // Total in øre
-  status        OrderStatus   @default(PENDING)
-  paymentMethod PaymentMethod?
-  
-  // Customer info
-  fullName      String
-  email         String
-  phone         String
-  note          String?
-  newsletter    Boolean       @default(false)
-  
-  // Payment info
-  paymentIntentId String?     // Stripe payment intent ID
-  mobilepayId     String?     // MobilePay transaction ID
-  
-  // Tour-specific info
-  selectedDate   String?       // For regular tours with dates
-  customDate     DateTime?    // For families/couples - preferred date
-  
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  id              String         @id @default(cuid())
+  orderNumber     String         @unique
+  tourId          String
+  tour            Tour           @relation(fields: [tourId], references: [id])
+  tourDateId      String?
+  tourDate        TourDate?      @relation(fields: [tourDateId], references: [id], onDelete: SetNull)
+  quantity        Int            @default(1)
+  totalAmount     Int
+  status          OrderStatus    @default(PENDING)
+  paymentMethod   PaymentMethod?
+  fullName        String
+  email           String
+  phone           String
+  note            String?
+  newsletter      Boolean        @default(false)
+  paymentIntentId String?
+  mobilepayId     String?
+  customDate      DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
   @@index([orderNumber])
   @@index([email])
   @@index([status])
   @@index([createdAt])
+  @@index([tourId])
+  @@index([tourDateId])
 }

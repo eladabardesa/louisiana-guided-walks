@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-100 bg-white">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 lg:px-16 py-12 sm:py-16">
+    <footer className="border-t border-black/10 bg-[#f3f0ea]">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-12 lg:px-16 py-8 sm:py-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
           <div>
             <p className="text-sm tracking-[0.2em] text-gray-900 uppercase mb-4">
@@ -21,6 +21,9 @@ export default function Footer() {
             <div className="flex flex-col gap-2">
               <Link href="/" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
                 Home
+              </Link>
+              <Link href="/tours" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+                Tours
               </Link>
               <Link href="/about" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
                 About

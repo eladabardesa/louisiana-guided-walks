@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import SiteChrome from "@/components/SiteChrome";
 import Analytics from "@/components/Analytics";
 import "./globals.css";
 
@@ -33,12 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="pt-16 sm:pt-20">
-        <Header />
-        <div className="min-h-screen">{children}</div>
-        <Footer />
+      <SiteChrome>
+        {children}
         <Analytics />
-      </body>
+      </SiteChrome>
     </html>
   );
 }
